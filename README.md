@@ -71,6 +71,129 @@ mvn compiler:compile
 ### 原型（archetype）插件
 原型（archetype）插件可以帮我创建基本的文件夹，和一些简单的Java源文件和测试文件。
 
+```
+mvn archetype:generate
+```
+让我选模板，直接回车选择默认的`maven-archetype-quickstart`，
+```
+...
+...
+2216: remote -> us.fatehi:schemacrawler-archetype-plugin-dbconnector (-)
+2217: remote -> us.fatehi:schemacrawler-archetype-plugin-lint (-)
+2218: remote -> ws.osiris:osiris-archetype (Maven Archetype for Osiris)
+2219: remote -> xyz.luan.generator:xyz-gae-generator (-)
+2220: remote -> xyz.luan.generator:xyz-generator (-)
+Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 1230:
+```
+再选版本，选最新的，
+```
+Choose org.apache.maven.archetypes:maven-archetype-quickstart version:
+1: 1.0-alpha-1
+2: 1.0-alpha-2
+3: 1.0-alpha-3
+4: 1.0-alpha-4
+5: 1.0
+6: 1.1
+7: 1.3
+```
+填配置信息，
+```
+[INFO] Parameter: groupId, Value: com.ciaoshen
+[INFO] Parameter: artifactId, Value: maven-demo
+[INFO] Parameter: version, Value: 1.0-SNAPSHOT
+[INFO] Parameter: package, Value: com.ciaoshen.maven.demo
+```
+成功之后，生成项目根目录`maven-demo`，
+```
+maven-base
+├── LICENSE
+├── README.md
+├── pom.xml
+└── src
+    ├── main
+    │   └── java
+    │       └── com
+    │           └── ciaoshen
+    │               └── maven
+    │                   └── demo
+    │                       └── App.java
+    └── test
+        └── java
+            └── com
+                └── ciaoshen
+                    └── maven
+                        └── demo
+                            └── AppTest.java
+```
+
+自动生成的`pom.xml`文件如下，
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.ciaoshen</groupId>
+  <artifactId>maven-demo</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>maven-demo</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.7.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.20.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
+```
 
 ### maven可以部署网站，我甚至可以把git部署github博客包括进去
 先创建leetcode项目
