@@ -195,8 +195,121 @@ maven-base
 </project>
 ```
 
+### 添加一个简单的计算器
+计算器只有一个源码文件`Calculator.java`和一个单元测试文件`CalculatorTest.java`：
+```
+.
+├── LICENSE
+├── README.md
+├── pom.xml
+├── src
+    ├── main
+    │   └── java
+    │       └── com
+    │           └── ciaoshen
+    │               └── maven
+    │                   └── demo
+    │                       └── Calculator.java
+    └── test
+        └── java
+            └── com
+                └── ciaoshen
+                    └── maven
+                        └── demo
+                            └── CalculatorTest.java
+```
+
+* `Calculator.java`是一个最简单的只能做加减乘除的计算器。`main()`函数里运行一个简单的测试。
+* `CalculatorTest.java`是对应的单元测试源码。
+
+比如,`Calculator.java`里有`add()`函数，
+```java
+public static int add(int a, int b) {
+    return a + b;
+}
+```
+`CalculatorTest.java`里就有`testAdd()`函数，
+```java
+@Test
+public void testAdd()
+{
+    int a = random();
+    int b = random();
+    assertEquals(calc.add(a, b), a + b);
+}
+```
+但maven只要用户写好单元测试，不需要用户自己写`Runner`。
+
+#### 直接运行测试
+只要输入命令行，maven自己编译目标类，测试代码，执行测试，
+```
+mvn test
+```
+
+测试结束后，目录结构如下，
+```
+.
+├── LICENSE
+├── README.md
+├── pom.xml
+├── src
+│   ├── main
+│   │   └── java
+│   │       └── com
+│   │           └── ciaoshen
+│   │               └── maven
+│   │                   └── demo
+│   │                       └── Calculator.java
+│   └── test
+│       └── java
+│           └── com
+│               └── ciaoshen
+│                   └── maven
+│                       └── demo
+│                           └── CalculatorTest.java
+└── target
+    ├── classes
+    │   └── com
+    │       └── ciaoshen
+    │           └── maven
+    │               └── demo
+    │                   └── Calculator.class
+    ├── generated-sources
+    │   └── annotations
+    ├── generated-test-sources
+    │   └── test-annotations
+    ├── maven-status
+    │   └── maven-compiler-plugin
+    │       ├── compile
+    │       │   └── default-compile
+    │       │       ├── createdFiles.lst
+    │       │       └── inputFiles.lst
+    │       └── testCompile
+    │           └── default-testCompile
+    │               ├── createdFiles.lst
+    │               └── inputFiles.lst
+    ├── surefire-reports
+    │   ├── TEST-com.ciaoshen.maven.demo.CalculatorTest.xml
+    │   └── com.ciaoshen.maven.demo.CalculatorTest.txt
+    └── test-classes
+        └── com
+            └── ciaoshen
+                └── maven
+                    └── demo
+                        └── CalculatorTest.class
+```
+
+其中`maven-status/maven-compiler-plugin`目录下多了几个`.lst`文件，列出了编译后所有`.class`类文件的绝对路径，比如`createdFiles.lst`里，
+```
+com/ciaoshen/maven/demo/Calculator.class
+```
+`surefile-reports/`文件夹下是测试的日志文件。
+
+
 ### maven可以部署网站，我甚至可以把git部署github博客包括进去
 先创建leetcode项目
 再写具体题目的算法
 再写博客
 再更新github
+
+### maven是构建系统的EJB2
